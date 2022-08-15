@@ -1,5 +1,4 @@
 <template>
-<navbar/>
 
 <div class="head">
 
@@ -8,7 +7,7 @@
 </div>
 
 
-<div v-for="{book,quote} in data.slice().reverse()" :key="data.id"> 
+<div v-for="{book,quote} in data" :key="data.id">   <!--Setting up a loop for recieved data.-->
 <div class="dataDrive">  
 <h3>{{book}}</h3>
 <p>" {{quote}} " </p>
@@ -20,33 +19,26 @@
 </template>
 
 <script>
-import navbar from '../components/navbar.vue';
 import axios from 'axios';
 
 export default {
-  name: "Compose",
+  name: "Home",
   
-  components:{
-    navbar,
-
-  },
   data(){
     return{
-      data:''
+      data:''   //Data schema to store data locally for rendering.
     }
   },
 
   mounted() {
     axios
-      .get("http://localhost:8080/get-data")
+      .get("http://localhost:8080/get-data")   //get('URL FROM WHERE WE WILL RECIEVE DATA')
       .then((response) => {
-        this.data = response.data
+        this.data = response.data   // Setting the response data as data.
         console.log(this.data);
       }).catch(err => {console.log(err)
         this.errored=true})
-        .finally(()=>{
-          this.loading=false
-        });
+        
   },
 };
 </script>

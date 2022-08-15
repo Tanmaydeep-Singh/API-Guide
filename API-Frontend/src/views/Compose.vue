@@ -1,8 +1,7 @@
 <template>
-<navbar/>
 
 
-            <form @submit.prevent="postData"  method="POST">
+            <form @submit.prevent="postData"  method="POST">  <!--Setting up a on click function to post data-->
               <div>
                <label for="User " >Book</label>
                 <input v-model="book" required  placeholder="Book Name">
@@ -17,18 +16,13 @@
 </template>
 
 <script>
-import navbar from '../components/navbar.vue'
-import axios from 'axios'
+import axios from 'axios'  //Importing axios 
 
 export default {
   name: "Compose",
   
-  components:{
-    navbar,
-  },
-
   data(){
-    return {
+    return {                       //Setting data schema
             book: '',
             quote: '',
     }
@@ -40,16 +34,15 @@ export default {
 
     
     postData(){
-          const  book = this.book
+          const  book = this.book        //Taking the input values and setting them to a variable.
           const  quote = this.quote
 
-          console.log(book)
-          console.log(quote)
+      
 
-          const data = {book:book, quote:quote}
+          const data = {book:book, quote:quote}  //creating a data object to be sent to backend
 
         
-        axios.post('http://localhost:8080/data', data)
+        axios.post('http://localhost:8080/data', data)         // port('THE URL LINK FOR POST API', THE DATA TO BE SENT)
         .then( response => console.log(response))
         .catch( err => console.log(err))
 
